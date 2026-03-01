@@ -1,5 +1,15 @@
 services:
 
+  simple-service:
+    tty: true
+    build:
+      context: ./simple-service
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./simple-service:/app
+    ports:
+      - "8021:8000"
+
   postgres:
     image: postgres:18.3
     restart: always
