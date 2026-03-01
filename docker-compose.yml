@@ -1,3 +1,7 @@
+networks:
+  dev-network:
+    driver: bridge
+
 services:
 
   simple-service:
@@ -9,10 +13,12 @@ services:
       - ./simple-service:/app
     ports:
       - "8021:8000"
+    networks:
+      - dev-network
 
   postgres:
     image: postgres:18.3
-    restart: always
+    restart: unless-stopped
     # set shared memory limit when using docker compose
     shm_size: 128mb
     environment:
@@ -20,9 +26,18 @@ services:
       POSTGRES_PASSWORD: postgres
     volumes:
       - ./postgresql:/var/lib/postgresql
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - dev-network
 
   adminer:
     image: adminer
-    restart: always
+    restart: unless-stopped
     ports:
       - "8080:8080"
+    networks:
+      - dev-network
