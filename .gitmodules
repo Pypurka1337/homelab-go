@@ -1,3 +1,4 @@
 [submodule "simple-service"]
 	path = simple-service
 	url = git@github.com:Pypurka1337/go-simple-service.git
+	branch = main
