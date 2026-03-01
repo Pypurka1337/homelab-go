@@ -1,7 +1,7 @@
 .PHONY: up down restart build rm help build-go-base rm-image clean
 
 DOCKER_COMPOSE = docker-compose
-GO_BASE_IMAGE = homelab-go-base:latest
+GO_BASE_IMAGE = homelab-go-base:1.26
 GO_BASE_CONTEXT = ./docker/base-go
 
 # Сборка базового Go-образа
