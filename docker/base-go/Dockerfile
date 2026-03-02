@@ -10,6 +10,9 @@ RUN apk add --no-cache \
     curl \
     && rm -rf /var/cache/apk/*
 
+# Создаём пользователя с UID 1000 (замените на свой, если нужно)
+RUN addgroup -g 1000 appgroup && adduser -u 1000 -G appgroup -D appuser
+
 # ----------------------------------------------------------------------
 # 2. Основные инструменты для Go-разработки
 # ----------------------------------------------------------------------
@@ -30,6 +33,9 @@ RUN go install github.com/air-verse/air@latest
 # ----------------------------------------------------------------------
 # RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \
 #     go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest
+
+# Даём пользователю права на запись в /go/pkg (кеш модулей)
+RUN mkdir -p /go/pkg && chown -R 1000:1000 /go/pkg
 
 # ----------------------------------------------------------------------
 # 4. Создаём рабочую директорию и добавляем Go-бинарники в PATH
