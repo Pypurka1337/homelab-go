@@ -4,6 +4,18 @@ networks:
 
 services:
 
+  grpc-gateway:
+    tty: true
+    build:
+      context: ./grpc-gateway
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./grpc-gateway:/app
+    ports:
+      - "8020:8000"
+    networks:
+      - dev-network
+
   simple-service:
     tty: true
     build:
