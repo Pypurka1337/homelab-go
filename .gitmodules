@@ -2,3 +2,7 @@
 	path = simple-service
 	url = git@github.com:Pypurka1337/go-simple-service.git
 	branch = main
+[submodule "grpc-gateway"]
+	path = grpc-gateway
+	url = git@github.com:Pypurka1337/grpc-gateway-go.git
+    branch = main
